@@ -22,12 +22,16 @@ namespace TankRx.Player.Factory
 
         public void SpawnTank(Vector3 position, Quaternion rotation)
         {
-            var tank = Object.Instantiate(_config.TankPrefab, position, rotation);
-
+            var tank = Spawn(position, rotation);
             SubscribeToMovements(tank);
             SubscribeToRotation(tank);
             SubscribeToFire(tank);
-            SubscribeToChangeWeapon();
+            SubscribeToChangeWeapon(tank);
+        }
+
+        private TankViewModel Spawn(Vector3 position, Quaternion rotation)
+        {
+            return Object.Instantiate(_config.TankPrefab, position, rotation);
         }
 
         private void SubscribeToMovements(TankViewModel tank)
@@ -38,7 +42,7 @@ namespace TankRx.Player.Factory
                 {
                     var direction = _config.TankSpeed * Time.deltaTime * Vector3.forward;
                     tank.Move(direction);
-                });
+                }).AddTo(tank);
         }
 
         private void SubscribeToRotation(TankViewModel tank)
@@ -49,7 +53,7 @@ namespace TankRx.Player.Factory
                 {
                     var rotation = rotationAxis * Time.deltaTime * _config.TankRotationSpeed;
                     tank.Rotate(new Vector3(0f, rotation, 0f));
-                });
+                }).AddTo(tank);
         }
 
         private void SubscribeToFire(TankViewModel tank)
@@ -60,14 +64,15 @@ namespace TankRx.Player.Factory
                 {
                     _bulletSpawner.SpawnBullet(tank.BulletSpawnPosition.position, tank.transform.rotation,
                         _config.BulletSpeed, _config.BulletLifeTime);
-                });
+                }).AddTo(tank);
         }
 
-        private void SubscribeToChangeWeapon()
+        private void SubscribeToChangeWeapon(TankViewModel tank)
         {
             _inputObservable.WeaponChange
                 .Where(changeAxis => changeAxis != 0f)
-                .Subscribe(changeAxis => { Debug.Log($"ChangeWeapon: {changeAxis}"); });
+                .Subscribe(changeAxis => { Debug.Log($"ChangeWeapon: {changeAxis}"); })
+                .AddTo(tank);
         }
     }
 }
