@@ -6,8 +6,12 @@ namespace TankRx.Player.ViewModels
     {
         public void Move(Vector3 direction)
         {
-            transform.Translate(direction, Space.World);
-            transform.localRotation = Quaternion.LookRotation(direction);
+            transform.Translate(direction, Space.Self);
+        }
+
+        public void Rotate(Vector3 addRotation)
+        {
+            transform.localEulerAngles += addRotation;
         }
     }
 }

@@ -8,5 +8,6 @@ namespace TankRx.Player.Configs
     {
         public TankViewModel TankPrefab;
         public float TankSpeed;
+        public float TankRotationSpeed;
     }
 }

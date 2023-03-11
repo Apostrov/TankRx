@@ -7,8 +7,8 @@ namespace TankRx.Input
 {
     public class InputObservable : IInputObservable
     {
-        public IObservable<Vector3> Movement => MovementObservable();
-        public IObservable<float> HeadRotation => HeadRotationObservable();
+        public IObservable<bool> IsMoving => MovementObservable();
+        public IObservable<float> Rotation => HeadRotationObservable();
         public IObservable<bool> IsFired => IsFiredObservable();
         public IObservable<float> WeaponChange => WeaponChangeObservable();
 
@@ -22,14 +22,9 @@ namespace TankRx.Input
             _input.Enable();
         }
 
-        private IObservable<Vector3> MovementObservable()
+        private IObservable<bool> MovementObservable()
         {
-            return _monoBehaviour.UpdateAsObservable()
-                .Select(_ =>
-                {
-                    var movementVector = _input.Player.Move.ReadValue<Vector2>();
-                    return new Vector3(movementVector.x, 0f, movementVector.y);
-                });
+            return _monoBehaviour.UpdateAsObservable().Select(_ => _input.Player.Move.IsPressed());
         }
 
         private IObservable<float> HeadRotationObservable()
@@ -46,7 +41,7 @@ namespace TankRx.Input
         {
             return _monoBehaviour.UpdateAsObservable().Select(_ =>
             {
-                if(_input.Player.ChangeWeapon.WasPressedThisFrame())
+                if (_input.Player.ChangeWeapon.WasPressedThisFrame())
                     return _input.Player.ChangeWeapon.ReadValue<float>();
                 return 0f;
             });

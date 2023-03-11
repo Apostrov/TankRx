@@ -22,27 +22,31 @@ namespace TankRx.Player.Models
             var tank = Object.Instantiate(_config.TankPrefab, position, rotation);
 
             SubscribeToMovements(tank);
-            SubscribeToHeadRotation();
+            SubscribeToRotation(tank);
             SubscribeToFire();
             SubscribeToChangeWeapon();
         }
 
         private void SubscribeToMovements(TankViewModel tank)
         {
-            _inputObservable.Movement
-                .Where(movementVector => movementVector != Vector3.zero)
-                .Subscribe(movementVector =>
+            _inputObservable.IsMoving
+                .Where(isMoving => isMoving)
+                .Subscribe(_ =>
                 {
-                    var direction = _config.TankSpeed * Time.deltaTime * movementVector;
+                    var direction = _config.TankSpeed * Time.deltaTime * Vector3.forward;
                     tank.Move(direction);
                 });
         }
 
-        private void SubscribeToHeadRotation()
+        private void SubscribeToRotation(TankViewModel tank)
         {
-            _inputObservable.HeadRotation
+            _inputObservable.Rotation
                 .Where(rotationAxis => rotationAxis != 0f)
-                .Subscribe(rotationAxis => { Debug.Log($"HeadRotation: {rotationAxis}"); });
+                .Subscribe(rotationAxis =>
+                {
+                    var rotation = rotationAxis * Time.deltaTime * _config.TankRotationSpeed;
+                    tank.Rotate(new Vector3(0f, rotation, 0f));
+                });
         }
 
         private void SubscribeToFire()

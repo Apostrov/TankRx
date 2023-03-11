@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   TankPrefab: {fileID: 8246545165909108863, guid: 8bbe74db62c5e4b40b6c3fa523d1b2f7, type: 3}
-  TankSpeed: 10
+  TankSpeed: 5
+  TankRotationSpeed: 100
