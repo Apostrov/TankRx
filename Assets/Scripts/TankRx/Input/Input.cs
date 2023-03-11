@@ -54,13 +54,13 @@ namespace TankRx.Input
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Look"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""85258334-001b-4d38-a1de-4842a70d29dc"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -169,7 +169,7 @@ namespace TankRx.Input
                 {
                     ""name"": ""LeftRight"",
                     ""id"": ""941cf6e8-aaca-4c44-b2dc-55d640c62e2c"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -178,7 +178,7 @@ namespace TankRx.Input
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""left"",
+                    ""name"": ""Negative"",
                     ""id"": ""ca316aa6-b713-49f8-a601-e6ec1c146325"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
@@ -189,7 +189,7 @@ namespace TankRx.Input
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""right"",
+                    ""name"": ""Positive"",
                     ""id"": ""f97ad199-6e0c-4563-adcb-d4329f41ecaa"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",

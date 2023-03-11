@@ -20,18 +20,43 @@ namespace TankRx.Player.Models
         public void SpawnTank(Vector3 position, Quaternion rotation)
         {
             var tank = Object.Instantiate(_config.TankPrefab, position, rotation);
+
             SubscribeToMovements(tank);
+            SubscribeToHeadRotation();
+            SubscribeToFire();
+            SubscribeToChangeWeapon();
         }
 
-        public void SubscribeToMovements(TankViewModel tank)
+        private void SubscribeToMovements(TankViewModel tank)
         {
             _inputObservable.Movement
-                .Where(v => v != Vector3.zero)
+                .Where(movementVector => movementVector != Vector3.zero)
                 .Subscribe(movementVector =>
                 {
                     var direction = _config.TankSpeed * Time.deltaTime * movementVector;
                     tank.Move(direction);
                 });
+        }
+
+        private void SubscribeToHeadRotation()
+        {
+            _inputObservable.HeadRotation
+                .Where(rotationAxis => rotationAxis != 0f)
+                .Subscribe(rotationAxis => { Debug.Log($"HeadRotation: {rotationAxis}"); });
+        }
+
+        private void SubscribeToFire()
+        {
+            _inputObservable.IsFired
+                .Where(isFired => isFired)
+                .Subscribe(_ => { Debug.Log("Fire"); });
+        }
+
+        private void SubscribeToChangeWeapon()
+        {
+            _inputObservable.WeaponChange
+                .Where(changeAxis => changeAxis != 0f)
+                .Subscribe(changeAxis => { Debug.Log($"ChangeWeapon: {changeAxis}"); });
         }
     }
 }
