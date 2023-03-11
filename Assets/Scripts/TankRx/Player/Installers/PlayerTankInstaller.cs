@@ -1,4 +1,4 @@
-﻿using TankRx.Player.Models;
+﻿using TankRx.Player.Factory;
 using Zenject;
 
 namespace TankRx.Player.Installers
@@ -7,8 +7,7 @@ namespace TankRx.Player.Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<ITank>().To<Tank>().AsSingle().NonLazy();
-            
+            Container.Bind<ITankSpawner>().To<TankSpawner>().AsSingle().NonLazy();
         }
     }
 }

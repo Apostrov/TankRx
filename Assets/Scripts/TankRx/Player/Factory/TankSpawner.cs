@@ -1,20 +1,23 @@
-﻿using TankRx.Input;
+﻿using TankRx.Bullet.Factory;
+using TankRx.Input;
 using TankRx.Player.Configs;
 using TankRx.Player.ViewModels;
 using UniRx;
 using UnityEngine;
 
-namespace TankRx.Player.Models
+namespace TankRx.Player.Factory
 {
-    public class Tank : ITank
+    public class TankSpawner : ITankSpawner
     {
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
+        private readonly BulletSpawner _bulletSpawner;
 
-        public Tank(PlayerConfig config, IInputObservable inputObservable)
+        public TankSpawner(PlayerConfig config, IInputObservable inputObservable)
         {
             _config = config;
             _inputObservable = inputObservable;
+            _bulletSpawner = new BulletSpawner(_config.BulletPrefab);
         }
 
         public void SpawnTank(Vector3 position, Quaternion rotation)
@@ -23,7 +26,7 @@ namespace TankRx.Player.Models
 
             SubscribeToMovements(tank);
             SubscribeToRotation(tank);
-            SubscribeToFire();
+            SubscribeToFire(tank);
             SubscribeToChangeWeapon();
         }
 
@@ -49,11 +52,15 @@ namespace TankRx.Player.Models
                 });
         }
 
-        private void SubscribeToFire()
+        private void SubscribeToFire(TankViewModel tank)
         {
             _inputObservable.IsFired
                 .Where(isFired => isFired)
-                .Subscribe(_ => { Debug.Log("Fire"); });
+                .Subscribe(_ =>
+                {
+                    _bulletSpawner.SpawnBullet(tank.BulletSpawnPosition.position, tank.transform.rotation,
+                        _config.BulletSpeed, _config.BulletLifeTime);
+                });
         }
 
         private void SubscribeToChangeWeapon()

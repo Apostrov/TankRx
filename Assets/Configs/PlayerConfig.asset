@@ -15,3 +15,6 @@ MonoBehaviour:
   TankPrefab: {fileID: 8246545165909108863, guid: 8bbe74db62c5e4b40b6c3fa523d1b2f7, type: 3}
   TankSpeed: 5
   TankRotationSpeed: 100
+  BulletPrefab: {fileID: 3833107593272838858, guid: 9dd1c260d29ff8249b35b2b691dc21f6, type: 3}
+  BulletSpeed: 10
+  BulletLifeTime: 1.5

@@ -1,4 +1,4 @@
-﻿using TankRx.Player.Models;
+﻿using TankRx.Player.Factory;
 using UnityEngine;
 using Zenject;
 
@@ -8,17 +8,17 @@ namespace TankRx.Player.UnityComponents
     {
         [SerializeField] private Transform _spawnPosition;
 
-        private ITank _tank;
+        private ITankSpawner _tankSpawner;
         
         [Inject]
-        private void Construct(ITank tank)
+        private void Construct(ITankSpawner tankSpawner)
         {
-            _tank = tank;
+            _tankSpawner = tankSpawner;
         }
 
         private void Start()
         {
-            _tank.SpawnTank(_spawnPosition.position, _spawnPosition.rotation);
+            _tankSpawner.SpawnTank(_spawnPosition.position, _spawnPosition.rotation);
         }
     }
 }
