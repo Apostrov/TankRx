@@ -1,13 +1,12 @@
 ﻿using System;
 using TankRx.Bullet.ViewModels;
 using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 using UnityEngine.Pool;
 
 namespace TankRx.Bullet.Factory
 {
-    public class BulletSpawner
+    public class BulletSpawner : IBulletSpawner
     {
         private readonly IObjectPool<BulletViewModel> _bulletPool;
 

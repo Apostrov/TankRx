@@ -11,7 +11,7 @@ namespace TankRx.Player.Factory
     {
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
-        private readonly BulletSpawner _bulletSpawner;
+        private readonly IBulletSpawner _bulletSpawner;
 
         public TankSpawner(PlayerConfig config, IInputObservable inputObservable)
         {

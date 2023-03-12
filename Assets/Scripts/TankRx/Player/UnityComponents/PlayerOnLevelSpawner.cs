@@ -4,7 +4,7 @@ using Zenject;
 
 namespace TankRx.Player.UnityComponents
 {
-    public class PlayerSpawner : MonoBehaviour
+    public class PlayerOnLevelSpawner : MonoBehaviour
     {
         [SerializeField] private Transform _spawnPosition;
 

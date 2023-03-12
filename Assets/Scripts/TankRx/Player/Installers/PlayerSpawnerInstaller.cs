@@ -6,7 +6,7 @@ namespace TankRx.Player.Installers
 {
     public class PlayerSpawnerInstaller : MonoInstaller
     {
-        [SerializeField] private PlayerSpawner _playerSpawner;
+        [SerializeField] private PlayerOnLevelSpawner _playerSpawner;
 
         public override void InstallBindings()
         {
