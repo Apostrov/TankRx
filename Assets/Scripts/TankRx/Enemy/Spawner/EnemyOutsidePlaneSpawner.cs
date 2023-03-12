@@ -1,10 +1,9 @@
-﻿using System;
-using TankRx.Enemy.Configs;
+﻿using TankRx.Enemy.Configs;
+using TankRx.Enemy.Interfaces;
 using TankRx.Level.UnityComponents;
 using UniRx;
 using UnityEngine;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace TankRx.Enemy.Factory
 {
@@ -24,7 +23,7 @@ namespace TankRx.Enemy.Factory
 
         public override void Spawn()
         {
-            Observable.Interval(TimeSpan.FromSeconds(_config.SpawnReload))
+            Observable.Interval(System.TimeSpan.FromSeconds(_config.SpawnReload))
                 .Subscribe(_ => { _enemyFactory.Create(GetRandomEdgePosition(), Quaternion.identity); })
                 ;
         }

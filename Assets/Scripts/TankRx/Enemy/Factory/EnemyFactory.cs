@@ -1,6 +1,7 @@
 ﻿using TankRx.Enemy.Configs;
+using TankRx.Enemy.Interfaces;
 using TankRx.Enemy.ViewModels;
-using TankRx.Player.Observables;
+using TankRx.Player.Interfaces;
 using UniRx;
 using UnityEngine;
 
@@ -21,12 +22,16 @@ namespace TankRx.Enemy.Factory
         {
             var enemy = Spawn(position, rotation);
             SubscribeToFollowPlayer(enemy);
+            SubscribeToDestroyOnZeroHp(enemy);
             return enemy;
         }
 
         private EnemyViewModel Spawn(Vector3 position, Quaternion rotation)
         {
-            return Object.Instantiate(_config.GetRandomEnemy(), position, rotation);
+            var enemyConfig = _config.GetRandomEnemy();
+            var enemy = Object.Instantiate(enemyConfig.Prefab, position, rotation);
+            enemy.SetModel(enemyConfig.EnemyModel);
+            return enemy;
         }
 
         private void SubscribeToFollowPlayer(EnemyViewModel enemy)
@@ -36,9 +41,16 @@ namespace TankRx.Enemy.Factory
                 .Subscribe(position =>
                 {
                     var direction = (position.Value - enemy.transform.position).normalized;
-                    var speed = _config.EnemySpeed * Time.deltaTime;
+                    var speed = enemy.Model.Speed * Time.deltaTime;
                     enemy.Move(direction * speed);
                 }).AddTo(enemy);
+        }
+
+        private void SubscribeToDestroyOnZeroHp(EnemyViewModel enemy)
+        {
+            enemy.Model.Hp
+                .Where(hp => hp <= 0f)
+                .Subscribe(_ => Object.Destroy(enemy.gameObject));
         }
     }
 }

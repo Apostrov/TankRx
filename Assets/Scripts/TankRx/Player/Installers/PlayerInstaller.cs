@@ -1,5 +1,6 @@
 ﻿using TankRx.Player.Configs;
 using TankRx.Player.Factory;
+using TankRx.Player.Interfaces;
 using TankRx.Player.Observables;
 using UnityEngine;
 using Zenject;

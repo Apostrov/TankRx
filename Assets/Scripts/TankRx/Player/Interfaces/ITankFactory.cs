@@ -1,7 +1,7 @@
 ﻿using TankRx.Player.ViewModels;
 using UnityEngine;
 
-namespace TankRx.Player.Factory
+namespace TankRx.Player.Interfaces
 {
     public interface ITankFactory
     {

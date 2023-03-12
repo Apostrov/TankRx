@@ -1,7 +1,8 @@
 ﻿using TankRx.Bullet.Factory;
+using TankRx.Bullet.Interfaces;
 using TankRx.Input;
 using TankRx.Player.Configs;
-using TankRx.Player.Observables;
+using TankRx.Player.Interfaces;
 using TankRx.Player.ViewModels;
 using UniRx;
 using UnityEngine;
@@ -13,14 +14,14 @@ namespace TankRx.Player.Factory
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
         private readonly IPlayerObservable _playerObservable;
-        private readonly IBulletSpawner _bulletSpawner;
+        private readonly IBulletFactory _bulletFactory;
 
         public TankFactory(PlayerConfig config, IInputObservable inputObservable, IPlayerObservable playerObservable)
         {
             _config = config;
             _inputObservable = inputObservable;
             _playerObservable = playerObservable;
-            _bulletSpawner = new BulletSpawner(_config.BulletPrefab);
+            _bulletFactory = new BulletFactory(_config.BulletPrefab);
         }
 
         public TankViewModel Create(Vector3 position, Quaternion rotation)
@@ -72,8 +73,8 @@ namespace TankRx.Player.Factory
                 .Where(isFired => isFired)
                 .Subscribe(_ =>
                 {
-                    _bulletSpawner.SpawnBullet(tank.BulletSpawnPosition.position, tank.transform.rotation,
-                        _config.BulletSpeed, _config.BulletLifeTime);
+                    _bulletFactory.Create(tank.BulletSpawnPosition.position, tank.transform.rotation,
+                        _config.PlayerBullet);
                 }).AddTo(tank);
         }
 

@@ -16,5 +16,7 @@ MonoBehaviour:
   TankSpeed: 5
   TankRotationSpeed: 100
   BulletPrefab: {fileID: 3833107593272838858, guid: 9dd1c260d29ff8249b35b2b691dc21f6, type: 3}
-  BulletSpeed: 10
-  BulletLifeTime: 1.5
+  PlayerBullet:
+    Damage: 5
+    Speed: 10
+    LifeTime: 1.5

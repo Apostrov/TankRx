@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TankRx.Player.Observables
+namespace TankRx.Player.Interfaces
 {
     public interface IPlayerObservable
     {

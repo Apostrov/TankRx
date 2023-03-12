@@ -1,4 +1,6 @@
 ﻿using System;
+using TankRx.Bullet.Interfaces;
+using TankRx.Bullet.Models;
 using TankRx.Bullet.ViewModels;
 using UniRx;
 using UnityEngine;
@@ -6,26 +8,27 @@ using UnityEngine.Pool;
 
 namespace TankRx.Bullet.Factory
 {
-    public class BulletSpawner : IBulletSpawner
+    public class BulletFactory : IBulletFactory
     {
         private readonly IObjectPool<BulletViewModel> _bulletPool;
 
-        public BulletSpawner(BulletViewModel bulletPrefab)
+        public BulletFactory(BulletViewModel bulletPrefab)
         {
             _bulletPool = new BulletsPool(bulletPrefab).GetPool();
         }
 
-        public BulletViewModel SpawnBullet(Vector3 position, Quaternion rotation, float flySpeed, float lifeTime)
+        public BulletViewModel Create(Vector3 position, Quaternion rotation, BulletModel model)
         {
-            var bullet = Spawn(position, rotation);
-            StartBulletMove(bullet, flySpeed);
-            StartBulletLifeTimeCounter(bullet, lifeTime);
+            var bullet = Spawn(position, rotation, model);
+            StartBulletMove(bullet, bullet.Model.Speed);
+            StartBulletLifeTimeCounter(bullet, bullet.Model.LifeTime);
             return bullet;
         }
 
-        private BulletViewModel Spawn(Vector3 position, Quaternion rotation)
+        private BulletViewModel Spawn(Vector3 position, Quaternion rotation, BulletModel model)
         {
             var bullet = _bulletPool.Get();
+            bullet.Model = model;
             bullet.transform.SetPositionAndRotation(position, rotation);
             return bullet;
         }

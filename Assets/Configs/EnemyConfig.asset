@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
   EnemyPrefabs:
-  - {fileID: 7525953371389332605, guid: 55af1fe69194ade478a842d81763e401, type: 3}
+  - Prefab: {fileID: 7525953371389332605, guid: 55af1fe69194ade478a842d81763e401, type: 3}
+    EnemyModel:
+      <Type>k__BackingField: 0
+      <Hp>k__BackingField:
+        value: 5
+      <Speed>k__BackingField: 2
+      <HitDamage>k__BackingField: 1
+      <GetDamageMultiplier>k__BackingField: 1
   SpawnReload: 2
-  EnemySpeed: 4

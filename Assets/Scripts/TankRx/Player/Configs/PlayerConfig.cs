@@ -1,4 +1,5 @@
-﻿using TankRx.Bullet.ViewModels;
+﻿using TankRx.Bullet.Models;
+using TankRx.Bullet.ViewModels;
 using TankRx.Player.ViewModels;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ namespace TankRx.Player.Configs
         
         [Header("Bullet")]
         public BulletViewModel BulletPrefab;
-        public float BulletSpeed;
-        public float BulletLifeTime;
+        public BulletModel PlayerBullet;
     }
 }

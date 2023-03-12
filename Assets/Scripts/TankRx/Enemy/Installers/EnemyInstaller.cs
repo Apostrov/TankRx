@@ -1,5 +1,6 @@
 ﻿using TankRx.Enemy.Configs;
 using TankRx.Enemy.Factory;
+using TankRx.Enemy.Interfaces;
 using UnityEngine;
 using Zenject;
 

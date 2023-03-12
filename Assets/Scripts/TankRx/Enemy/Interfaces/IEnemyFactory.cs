@@ -1,7 +1,7 @@
 ﻿using TankRx.Enemy.ViewModels;
 using UnityEngine;
 
-namespace TankRx.Enemy.Factory
+namespace TankRx.Enemy.Interfaces
 {
     public interface IEnemyFactory
     {
