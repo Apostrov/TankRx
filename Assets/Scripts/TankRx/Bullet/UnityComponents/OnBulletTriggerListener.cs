@@ -17,6 +17,7 @@ namespace TankRx.Bullet.UnityComponents
                 {
                     if(!collision.TryGetComponent<IDamageable>(out var damageable)) return;
                     damageable.DoDamage(_bulletViewModel.Model.Damage);
+                    Destroy(_bulletViewModel.gameObject);
                 });
         }
     }
