@@ -30,7 +30,6 @@ namespace TankRx.Bullet.Factory
         // Called when an item is returned to the pool using Release
         void OnReturnedToPool(BulletViewModel bullet)
         {
-            bullet.Disposable.Clear();
             bullet.gameObject.SetActive(false);
         }
 

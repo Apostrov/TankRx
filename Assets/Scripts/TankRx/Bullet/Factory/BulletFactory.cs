@@ -30,6 +30,7 @@ namespace TankRx.Bullet.Factory
             var bullet = _bulletPool.Get();
             bullet.Model = model;
             bullet.transform.SetPositionAndRotation(position, rotation);
+            bullet.OnReturnToPool = () => _bulletPool.Release(bullet);
             return bullet;
         }
 
@@ -42,7 +43,7 @@ namespace TankRx.Bullet.Factory
         private void StartBulletLifeTimeCounter(BulletViewModel bullet, float lifeTime)
         {
             Observable.Timer(TimeSpan.FromSeconds(lifeTime))
-                .Subscribe(_ => _bulletPool.Release(bullet))
+                .Subscribe(_ => bullet.ReturnToPool())
                 .AddTo(bullet.Disposable);
         }
     }
