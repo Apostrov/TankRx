@@ -3,11 +3,11 @@ using Zenject;
 
 namespace TankRx.Player.Installers
 {
-    public class PlayerTankInstaller : MonoInstaller
+    public class PlayerFactoryInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
-            Container.Bind<ITankSpawner>().To<TankSpawner>().AsSingle().NonLazy();
+            Container.Bind<ITankFactory>().To<TankFactory>().AsSingle().NonLazy();
         }
     }
 }

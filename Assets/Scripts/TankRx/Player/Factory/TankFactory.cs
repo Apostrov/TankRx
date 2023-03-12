@@ -7,26 +7,27 @@ using UnityEngine;
 
 namespace TankRx.Player.Factory
 {
-    public class TankSpawner : ITankSpawner
+    public class TankFactory : ITankFactory
     {
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
         private readonly IBulletSpawner _bulletSpawner;
 
-        public TankSpawner(PlayerConfig config, IInputObservable inputObservable)
+        public TankFactory(PlayerConfig config, IInputObservable inputObservable)
         {
             _config = config;
             _inputObservable = inputObservable;
             _bulletSpawner = new BulletSpawner(_config.BulletPrefab);
         }
 
-        public void SpawnTank(Vector3 position, Quaternion rotation)
+        public TankViewModel Create(Vector3 position, Quaternion rotation)
         {
             var tank = Spawn(position, rotation);
             SubscribeToMovements(tank);
             SubscribeToRotation(tank);
             SubscribeToFire(tank);
             SubscribeToChangeWeapon(tank);
+            return tank;
         }
 
         private TankViewModel Spawn(Vector3 position, Quaternion rotation)

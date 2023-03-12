@@ -17,10 +17,16 @@ namespace TankRx.Bullet.Factory
 
         public BulletViewModel SpawnBullet(Vector3 position, Quaternion rotation, float flySpeed, float lifeTime)
         {
-            var bullet = _bulletPool.Get();
-            bullet.transform.SetPositionAndRotation(position, rotation);
+            var bullet = Spawn(position, rotation);
             StartBulletMove(bullet, flySpeed);
             StartBulletLifeTimeCounter(bullet, lifeTime);
+            return bullet;
+        }
+
+        private BulletViewModel Spawn(Vector3 position, Quaternion rotation)
+        {
+            var bullet = _bulletPool.Get();
+            bullet.transform.SetPositionAndRotation(position, rotation);
             return bullet;
         }
 

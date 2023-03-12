@@ -1,4 +1,4 @@
-﻿using TankRx.Player.UnityComponents;
+﻿using TankRx.Player.Factory;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +6,7 @@ namespace TankRx.Player.Installers
 {
     public class PlayerSpawnerInstaller : MonoInstaller
     {
-        [SerializeField] private PlayerOnLevelSpawner _playerSpawner;
+        [SerializeField] private TankOnPositionSpawner _playerSpawner;
 
         public override void InstallBindings()
         {
