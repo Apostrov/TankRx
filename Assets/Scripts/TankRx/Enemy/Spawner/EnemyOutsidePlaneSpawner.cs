@@ -1,11 +1,11 @@
 ﻿using TankRx.Enemy.Configs;
 using TankRx.Enemy.Interfaces;
-using TankRx.Level.UnityComponents;
+using TankRx.Level.Spawner;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace TankRx.Enemy.Factory
+namespace TankRx.Enemy.Spawner
 {
     public class EnemyOutsidePlaneSpawner : ALevelSpawner
     {

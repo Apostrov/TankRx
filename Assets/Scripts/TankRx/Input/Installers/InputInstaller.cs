@@ -1,6 +1,8 @@
-﻿using Zenject;
+﻿using TankRx.Input.Interfaces;
+using TankRx.Input.Observables;
+using Zenject;
 
-namespace TankRx.Input
+namespace TankRx.Input.Installers
 {
     public class InputInstaller : MonoInstaller
     {

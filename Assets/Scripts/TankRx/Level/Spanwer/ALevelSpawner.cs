@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TankRx.Level.UnityComponents
+namespace TankRx.Level.Spawner
 {
     public abstract class ALevelSpawner : MonoBehaviour
     {

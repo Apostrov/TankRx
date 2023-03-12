@@ -1,6 +1,7 @@
 ﻿using TankRx.Bullet.Factory;
 using TankRx.Bullet.Interfaces;
 using TankRx.Input;
+using TankRx.Input.Interfaces;
 using TankRx.Player.Configs;
 using TankRx.Player.Interfaces;
 using TankRx.Player.ViewModels;

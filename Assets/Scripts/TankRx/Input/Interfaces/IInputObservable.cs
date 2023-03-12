@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TankRx.Input
+namespace TankRx.Input.Interfaces
 {
     public interface IInputObservable
     {

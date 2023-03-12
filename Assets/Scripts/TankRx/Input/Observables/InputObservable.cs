@@ -1,9 +1,8 @@
 ﻿using System;
+using TankRx.Input.Interfaces;
 using UniRx;
-using UniRx.Triggers;
-using UnityEngine;
 
-namespace TankRx.Input
+namespace TankRx.Input.Observables
 {
     public class InputObservable : IInputObservable
     {

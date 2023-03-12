@@ -1,4 +1,4 @@
-﻿using TankRx.Player.Factory;
+﻿using TankRx.Player.Spawner;
 using UnityEngine;
 using Zenject;
 

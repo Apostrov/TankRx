@@ -1,4 +1,4 @@
-﻿using TankRx.Enemy.Factory;
+﻿using TankRx.Enemy.Spawner;
 using UnityEngine;
 using Zenject;
 

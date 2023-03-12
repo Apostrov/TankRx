@@ -1,9 +1,9 @@
-﻿using TankRx.Level.UnityComponents;
+﻿using TankRx.Level.Spawner;
 using TankRx.Player.Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace TankRx.Player.Factory
+namespace TankRx.Player.Spawner
 {
     public class TankOnPositionSpawner : ALevelSpawner
     {
