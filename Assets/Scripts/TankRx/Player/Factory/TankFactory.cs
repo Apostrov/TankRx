@@ -1,6 +1,7 @@
 ﻿using TankRx.Bullet.Factory;
 using TankRx.Input;
 using TankRx.Player.Configs;
+using TankRx.Player.Observables;
 using TankRx.Player.ViewModels;
 using UniRx;
 using UnityEngine;
@@ -11,23 +12,31 @@ namespace TankRx.Player.Factory
     {
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
+        private readonly IPlayerObservable _playerObservable;
         private readonly IBulletSpawner _bulletSpawner;
 
-        public TankFactory(PlayerConfig config, IInputObservable inputObservable)
+        public TankFactory(PlayerConfig config, IInputObservable inputObservable, IPlayerObservable playerObservable)
         {
             _config = config;
             _inputObservable = inputObservable;
+            _playerObservable = playerObservable;
             _bulletSpawner = new BulletSpawner(_config.BulletPrefab);
         }
 
         public TankViewModel Create(Vector3 position, Quaternion rotation)
         {
             var tank = Spawn(position, rotation);
+            RegisterPlayerObservable(tank);
             SubscribeToMovements(tank);
             SubscribeToRotation(tank);
             SubscribeToFire(tank);
             SubscribeToChangeWeapon(tank);
             return tank;
+        }
+
+        private void RegisterPlayerObservable(TankViewModel tank)
+        {
+            _playerObservable.RegisterPlayer(tank.gameObject);
         }
 
         private TankViewModel Spawn(Vector3 position, Quaternion rotation)

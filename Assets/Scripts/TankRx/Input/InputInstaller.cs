@@ -6,8 +6,7 @@ namespace TankRx.Input
     {
         public override void InstallBindings()
         {
-            var inputObservable = new InputObservable(this);
-            Container.Bind<IInputObservable>().FromInstance(inputObservable).AsSingle().NonLazy();
+            Container.Bind<IInputObservable>().To<InputObservable>().AsSingle().NonLazy();
         }
     }
 }
