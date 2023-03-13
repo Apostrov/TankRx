@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b7cc7ddee5e4d40955167ffcb7ffd26, type: 3}
+  m_Name: PlayerConfig
+  m_EditorClassIdentifier: 
+  TankPrefab: {fileID: 8246545165909108863, guid: 8bbe74db62c5e4b40b6c3fa523d1b2f7, type: 3}
+  PlayerTank:
+    <WeaponType>k__BackingField:
+      value: 0
+    <Hp>k__BackingField:
+      value: 10
+    <Speed>k__BackingField: 5
+    <RotationSpeed>k__BackingField: 100
+    <GetDamageMultiplier>k__BackingField: 0.8
+  WeaponConfigs:
+    list:
+    - Key: 0
+      Value:
+        BulletPrefab: {fileID: 3833107593272838858, guid: 9dd1c260d29ff8249b35b2b691dc21f6, type: 3}
+        BulletModel:
+          <Damage>k__BackingField: 5
+          <Speed>k__BackingField: 10
+          <LifeTime>k__BackingField: 2
+    - Key: 1
+      Value:
+        BulletPrefab: {fileID: 6998121294332643658, guid: b46579a326db5134aa1565f67a6f35c0, type: 3}
+        BulletModel:
+          <Damage>k__BackingField: 10
+          <Speed>k__BackingField: 8
+          <LifeTime>k__BackingField: 3
+    keyCollision: 0
