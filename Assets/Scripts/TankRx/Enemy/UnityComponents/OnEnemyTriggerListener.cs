@@ -1,24 +1,18 @@
-﻿using TankRx.Common.Interfaces;
+﻿using TankRx.Common.UnityComponents;
 using TankRx.Enemy.ViewModels;
-using UniRx;
-using UniRx.Triggers;
 using UnityEngine;
 
 namespace TankRx.Enemy.UnityComponents
 {
-    public class OnEnemyTriggerListener : MonoBehaviour
+    public class OnEnemyTriggerListener : ADamageOnTrigger
     {
         [SerializeField] private EnemyViewModel _enemyViewModel;
 
-        private void Start()
+        protected override float Damage => _enemyViewModel.Model.HitDamage;
+
+        protected override void OnSuccessTrigger()
         {
-            this.OnTriggerEnterAsObservable()
-                .Subscribe(collision =>
-                {
-                    if (!collision.TryGetComponent<IDamageable>(out var damageable)) return;
-                    damageable.DoDamage(_enemyViewModel.Model.HitDamage);
-                    Destroy(_enemyViewModel.gameObject);
-                });
+            Destroy(_enemyViewModel.gameObject);
         }
     }
 }

@@ -61,7 +61,8 @@ namespace TankRx.Enemy.Factory
         {
             enemy.Model.Hp
                 .Where(hp => hp <= 0f)
-                .Subscribe(_ => Object.Destroy(enemy.gameObject));
+                .Subscribe(_ => Object.Destroy(enemy.gameObject))
+                .AddTo(enemy);
         }
     }
 }

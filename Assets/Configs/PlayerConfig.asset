@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TankPrefab: {fileID: 8246545165909108863, guid: 8bbe74db62c5e4b40b6c3fa523d1b2f7, type: 3}
   PlayerTank:
-    <WeaponType>k__BackingField: 0
+    <WeaponType>k__BackingField:
+      value: 0
     <Hp>k__BackingField:
       value: 10
     <Speed>k__BackingField: 5
@@ -26,14 +27,14 @@ MonoBehaviour:
       Value:
         BulletPrefab: {fileID: 3833107593272838858, guid: 9dd1c260d29ff8249b35b2b691dc21f6, type: 3}
         BulletModel:
-          Damage: 5
-          Speed: 10
-          LifeTime: 2
+          <Damage>k__BackingField: 5
+          <Speed>k__BackingField: 10
+          <LifeTime>k__BackingField: 2
     - Key: 1
       Value:
         BulletPrefab: {fileID: 6998121294332643658, guid: b46579a326db5134aa1565f67a6f35c0, type: 3}
         BulletModel:
-          Damage: 10
-          Speed: 8
-          LifeTime: 3
+          <Damage>k__BackingField: 10
+          <Speed>k__BackingField: 8
+          <LifeTime>k__BackingField: 3
     keyCollision: 0

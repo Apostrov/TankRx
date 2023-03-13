@@ -9,7 +9,6 @@ namespace TankRx.Bullet.ViewModels
     {
         public BulletModel Model { get; set; }
         public CompositeDisposable Disposable { get; } = new();
-        
         public Action OnReturnToPool { private get; set; }
 
         public void Move(Vector3 direction)

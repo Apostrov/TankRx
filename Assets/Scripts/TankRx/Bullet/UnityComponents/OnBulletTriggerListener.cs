@@ -1,24 +1,18 @@
 ﻿using TankRx.Bullet.ViewModels;
-using TankRx.Common.Interfaces;
-using UniRx;
-using UniRx.Triggers;
+using TankRx.Common.UnityComponents;
 using UnityEngine;
 
 namespace TankRx.Bullet.UnityComponents
 {
-    public class OnBulletTriggerListener : MonoBehaviour
+    public class OnBulletTriggerListener : ADamageOnTrigger
     {
         [SerializeField] private BulletViewModel _bulletViewModel;
 
-        private void Start()
+        protected override float Damage => _bulletViewModel.Model.Damage;
+
+        protected override void OnSuccessTrigger()
         {
-            this.OnTriggerEnterAsObservable()
-                .Subscribe(collision =>
-                {
-                    if(!collision.TryGetComponent<IDamageable>(out var damageable)) return;
-                    damageable.DoDamage(_bulletViewModel.Model.Damage);
-                    _bulletViewModel.ReturnToPool();
-                });
+            _bulletViewModel.ReturnToPool();
         }
     }
 }

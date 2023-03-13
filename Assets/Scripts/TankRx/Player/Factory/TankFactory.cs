@@ -96,10 +96,10 @@ namespace TankRx.Player.Factory
                 .Where(changeAxis => changeAxis != 0f)
                 .Subscribe(changeAxis =>
                 {
-                    var nextIndex = 1;
-                    if (changeAxis < 0f)
-                        nextIndex = -1;
+                    var nextIndex = changeAxis < 0f ? -1 : 1;
                     var nextWeapon = ((int)tank.Model.WeaponType.Value + nextIndex) % _config.WeaponConfigs.Count;
+                    if (nextWeapon < 0)
+                        nextWeapon = _config.WeaponConfigs.Count - 1;
                     tank.Model.WeaponType.Value = (WeaponType)nextWeapon;
                 })
                 .AddTo(tank);
@@ -111,7 +111,8 @@ namespace TankRx.Player.Factory
         {
             tank.Model.Hp
                 .Where(hp => hp <= 0f)
-                .Subscribe(_ => Object.Destroy(tank.gameObject));
+                .Subscribe(_ => Object.Destroy(tank.gameObject))
+                .AddTo(tank);
         }
     }
 }
