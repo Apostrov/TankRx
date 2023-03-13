@@ -1,7 +1,6 @@
 ﻿using TankRx.Enemy.Models;
 using TankRx.Enemy.ViewModels;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace TankRx.Enemy.Configs
 {

@@ -6,6 +6,7 @@ namespace TankRx.Player.Models
     [System.Serializable]
     public struct TankModel
     {
+        [field: SerializeField] public ReactiveProperty<WeaponType> WeaponType { get; private set; }
         [field: SerializeField] public ReactiveProperty<float> Hp { get; private set; }
         [field: SerializeField] public float Speed { get; private set; }
         [field: SerializeField] public float RotationSpeed { get; private set; }
@@ -15,6 +16,7 @@ namespace TankRx.Player.Models
 
         public TankModel(TankModel copy)
         {
+            WeaponType = new ReactiveProperty<WeaponType>(copy.WeaponType.Value);
             Hp = new ReactiveProperty<float>(copy.Hp.Value);
             Speed = copy.Speed;
             RotationSpeed = copy.RotationSpeed;

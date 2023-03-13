@@ -12,9 +12,15 @@ namespace TankRx.Player.Configs
         [Header("Tank")]
         public TankViewModel TankPrefab;
         public TankModel PlayerTank;
-        
-        [Header("Bullet")]
+
+        [Header("Weapons")]
+        public GenericDictionary<WeaponType, BulletConfig> WeaponConfigs;
+    }
+    
+    [System.Serializable]
+    public class BulletConfig
+    {
         public BulletViewModel BulletPrefab;
-        public BulletModel PlayerBullet;
+        public BulletModel BulletModel;
     }
 }

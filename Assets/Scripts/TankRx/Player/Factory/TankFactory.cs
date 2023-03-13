@@ -1,4 +1,5 @@
-﻿using TankRx.Bullet.Factory;
+﻿using System.Collections.Generic;
+using TankRx.Bullet.Factory;
 using TankRx.Bullet.Interfaces;
 using TankRx.Input.Interfaces;
 using TankRx.Player.Configs;
@@ -14,14 +15,19 @@ namespace TankRx.Player.Factory
         private readonly PlayerConfig _config;
         private readonly IInputObservable _inputObservable;
         private readonly IPlayerObservable _playerObservable;
-        private readonly IBulletFactory _bulletFactory;
+        private readonly Dictionary<WeaponType, IBulletFactory> _bulletFactories;
 
         public TankFactory(PlayerConfig config, IInputObservable inputObservable, IPlayerObservable playerObservable)
         {
             _config = config;
             _inputObservable = inputObservable;
             _playerObservable = playerObservable;
-            _bulletFactory = new BulletFactory(_config.BulletPrefab);
+
+            _bulletFactories = new Dictionary<WeaponType, IBulletFactory>();
+            foreach (var typeAndConfig in _config.WeaponConfigs)
+            {
+                _bulletFactories[typeAndConfig.Key] = new BulletFactory(typeAndConfig.Value.BulletPrefab);
+            }
         }
 
         public TankViewModel Create(Vector3 position, Quaternion rotation)
@@ -76,8 +82,11 @@ namespace TankRx.Player.Factory
                 .Where(isFired => isFired)
                 .Subscribe(_ =>
                 {
-                    _bulletFactory.Create(tank.BulletSpawnPosition.position, tank.transform.rotation,
-                        _config.PlayerBullet);
+                    var weaponType = tank.Model.WeaponType;
+                    var factory = _bulletFactories[weaponType.Value];
+                    factory.Create(tank.GetBulletSpawnPosition(),
+                        tank.transform.rotation,
+                        _config.WeaponConfigs[weaponType.Value].BulletModel);
                 }).AddTo(tank);
         }
 
@@ -85,10 +94,19 @@ namespace TankRx.Player.Factory
         {
             _inputObservable.WeaponChange
                 .Where(changeAxis => changeAxis != 0f)
-                .Subscribe(changeAxis => { Debug.Log($"ChangeWeapon: {changeAxis}"); })
+                .Subscribe(changeAxis =>
+                {
+                    var nextIndex = 1;
+                    if (changeAxis < 0f)
+                        nextIndex = -1;
+                    var nextWeapon = ((int)tank.Model.WeaponType.Value + nextIndex) % _config.WeaponConfigs.Count;
+                    tank.Model.WeaponType.Value = (WeaponType)nextWeapon;
+                })
                 .AddTo(tank);
+
+            tank.Model.WeaponType.Subscribe(tank.ChangeWeapon);
         }
-        
+
         private void SubscribeToDestroyOnZeroHp(TankViewModel tank)
         {
             tank.Model.Hp
