@@ -1,6 +1,5 @@
 ﻿using TankRx.Bullet.Factory;
 using TankRx.Bullet.Interfaces;
-using TankRx.Input;
 using TankRx.Input.Interfaces;
 using TankRx.Player.Configs;
 using TankRx.Player.Interfaces;
@@ -43,7 +42,9 @@ namespace TankRx.Player.Factory
 
         private TankViewModel Spawn(Vector3 position, Quaternion rotation)
         {
-            return Object.Instantiate(_config.TankPrefab, position, rotation);
+            var tank = Object.Instantiate(_config.TankPrefab, position, rotation);
+            tank.SetModel(_config.PlayerTank);
+            return tank;
         }
 
         private void SubscribeToMovements(TankViewModel tank)
@@ -52,7 +53,7 @@ namespace TankRx.Player.Factory
                 .Where(isMoving => isMoving)
                 .Subscribe(_ =>
                 {
-                    var direction = _config.TankSpeed * Time.deltaTime * Vector3.forward;
+                    var direction = tank.Model.Speed * Time.deltaTime * Vector3.forward;
                     tank.Move(direction);
                 }).AddTo(tank);
         }
@@ -63,7 +64,7 @@ namespace TankRx.Player.Factory
                 .Where(rotationAxis => rotationAxis != 0f)
                 .Subscribe(rotationAxis =>
                 {
-                    var rotation = rotationAxis * Time.deltaTime * _config.TankRotationSpeed;
+                    var rotation = rotationAxis * Time.deltaTime * tank.Model.RotationSpeed;
                     tank.Rotate(new Vector3(0f, rotation, 0f));
                 }).AddTo(tank);
         }

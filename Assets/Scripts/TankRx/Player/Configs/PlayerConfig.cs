@@ -1,5 +1,6 @@
 ﻿using TankRx.Bullet.Models;
 using TankRx.Bullet.ViewModels;
+using TankRx.Player.Models;
 using TankRx.Player.ViewModels;
 using UnityEngine;
 
@@ -10,8 +11,7 @@ namespace TankRx.Player.Configs
     {
         [Header("Tank")]
         public TankViewModel TankPrefab;
-        public float TankSpeed;
-        public float TankRotationSpeed;
+        public TankModel PlayerTank;
         
         [Header("Bullet")]
         public BulletViewModel BulletPrefab;

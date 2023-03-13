@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   TankPrefab: {fileID: 8246545165909108863, guid: 8bbe74db62c5e4b40b6c3fa523d1b2f7, type: 3}
-  TankSpeed: 5
-  TankRotationSpeed: 100
+  PlayerTank:
+    <Hp>k__BackingField:
+      value: 10
+    <Speed>k__BackingField: 5
+    <RotationSpeed>k__BackingField: 100
+    <GetDamageMultiplier>k__BackingField: 0.8
   BulletPrefab: {fileID: 3833107593272838858, guid: 9dd1c260d29ff8249b35b2b691dc21f6, type: 3}
   PlayerBullet:
     Damage: 5
