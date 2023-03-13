@@ -17,8 +17,25 @@ MonoBehaviour:
     EnemyModel:
       <Type>k__BackingField: 0
       <Hp>k__BackingField:
-        value: 5
+        value: 6
       <Speed>k__BackingField: 2
+      <HitDamage>k__BackingField: 2
+      <GetDamageMultiplier>k__BackingField: 0.8
+  - Prefab: {fileID: 5181645379838707259, guid: e118d6e44ace3344fb4173ebc5095555, type: 3}
+    EnemyModel:
+      <Type>k__BackingField: 1
+      <Hp>k__BackingField:
+        value: 3
+      <Speed>k__BackingField: 3
       <HitDamage>k__BackingField: 1
       <GetDamageMultiplier>k__BackingField: 1
+  - Prefab: {fileID: 5441942539539672290, guid: f8d2a4e66c4d1a843bd9352d7a4b111b, type: 3}
+    EnemyModel:
+      <Type>k__BackingField: 2
+      <Hp>k__BackingField:
+        value: 8
+      <Speed>k__BackingField: 1
+      <HitDamage>k__BackingField: 3
+      <GetDamageMultiplier>k__BackingField: 0.5
+  NumberOfEnemyOnLevel: 10
   SpawnReload: 2

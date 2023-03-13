@@ -1,5 +1,6 @@
 ﻿using TankRx.Enemy.Configs;
 using TankRx.Enemy.Interfaces;
+using TankRx.Enemy.Models;
 using TankRx.Enemy.ViewModels;
 using TankRx.Player.Interfaces;
 using UniRx;
@@ -11,11 +12,13 @@ namespace TankRx.Enemy.Factory
     {
         private readonly EnemyConfig _config;
         private readonly IPlayerObservable _playerObservable;
+        private readonly EnemyAliveModel _aliveModel;
 
-        public EnemyFactory(EnemyConfig config, IPlayerObservable playerObservable)
+        public EnemyFactory(EnemyConfig config, IPlayerObservable playerObservable, EnemyAliveModel aliveModel)
         {
             _config = config;
             _playerObservable = playerObservable;
+            _aliveModel = aliveModel;
         }
 
         public EnemyViewModel Create(Vector3 position, Quaternion rotation)
@@ -31,6 +34,8 @@ namespace TankRx.Enemy.Factory
             var enemyConfig = _config.GetRandomEnemy();
             var enemy = Object.Instantiate(enemyConfig.Prefab, position, rotation);
             enemy.SetModel(enemyConfig.EnemyModel);
+            _aliveModel.RegisterNewEnemy(enemy);
+            enemy.OnDestroyCallback = () => _aliveModel.UnregisterEnemy(enemy);
             return enemy;
         }
 

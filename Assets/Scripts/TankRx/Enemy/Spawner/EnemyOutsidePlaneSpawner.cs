@@ -1,5 +1,6 @@
 ﻿using TankRx.Enemy.Configs;
 using TankRx.Enemy.Interfaces;
+using TankRx.Enemy.Models;
 using TankRx.Level.Spawner;
 using UniRx;
 using UnityEngine;
@@ -13,17 +14,21 @@ namespace TankRx.Enemy.Spawner
 
         private IEnemyFactory _enemyFactory;
         private EnemyConfig _config;
+        private EnemyAliveModel _aliveModel;
 
         [Inject]
-        public void Construct(IEnemyFactory enemyFactory, EnemyConfig config)
+        public void Construct(IEnemyFactory enemyFactory, EnemyConfig config, EnemyAliveModel aliveModel)
         {
             _enemyFactory = enemyFactory;
             _config = config;
+            _aliveModel = aliveModel;
         }
 
         public override void Spawn()
         {
-            Observable.Interval(System.TimeSpan.FromSeconds(_config.SpawnReload))
+            Observable
+                .Interval(System.TimeSpan.FromSeconds(_config.SpawnReload))
+                .Where(_ => _aliveModel.GetAliveNumber() < _config.NumberOfEnemyOnLevel)
                 .Subscribe(_ => { _enemyFactory.Create(GetRandomEdgePosition(), Quaternion.identity); })
                 ;
         }

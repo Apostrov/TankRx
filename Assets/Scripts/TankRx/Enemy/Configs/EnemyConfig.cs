@@ -11,6 +11,7 @@ namespace TankRx.Enemy.Configs
         public EnemyInfo[] EnemyPrefabs;
 
         [Header("Spawner")]
+        public int NumberOfEnemyOnLevel;
         public float SpawnReload;
 
         #region helpers
@@ -26,7 +27,7 @@ namespace TankRx.Enemy.Configs
     [System.Serializable]
     public class EnemyInfo
     {
-        [FormerlySerializedAs("EnemyPrefab")] public EnemyViewModel Prefab;
+        public EnemyViewModel Prefab;
         public EnemyModel EnemyModel;
     }
 }
