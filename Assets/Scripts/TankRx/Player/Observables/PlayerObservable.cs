@@ -1,6 +1,7 @@
 ﻿using System;
 using TankRx.Player.Interfaces;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace TankRx.Player.Observables
@@ -16,11 +17,13 @@ namespace TankRx.Player.Observables
         {
             _isPlayerRegistered = true;
             _player = player;
+            _player.OnDestroyAsObservable().Subscribe(_ => UnregisterPlayer());
         }
 
         public void UnregisterPlayer()
         {
             _isPlayerRegistered = false;
+            _player = null;
         }
 
         private IObservable<Vector3?> PlayerPositionObservable()

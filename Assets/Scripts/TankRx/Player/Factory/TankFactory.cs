@@ -32,6 +32,7 @@ namespace TankRx.Player.Factory
             SubscribeToRotation(tank);
             SubscribeToFire(tank);
             SubscribeToChangeWeapon(tank);
+            SubscribeToDestroyOnZeroHp(tank);
             return tank;
         }
 
@@ -86,6 +87,13 @@ namespace TankRx.Player.Factory
                 .Where(changeAxis => changeAxis != 0f)
                 .Subscribe(changeAxis => { Debug.Log($"ChangeWeapon: {changeAxis}"); })
                 .AddTo(tank);
+        }
+        
+        private void SubscribeToDestroyOnZeroHp(TankViewModel tank)
+        {
+            tank.Model.Hp
+                .Where(hp => hp <= 0f)
+                .Subscribe(_ => Object.Destroy(tank.gameObject));
         }
     }
 }

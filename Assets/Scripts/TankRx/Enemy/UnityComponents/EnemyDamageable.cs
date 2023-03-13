@@ -1,4 +1,4 @@
-﻿using TankRx.Bullet.Interfaces;
+﻿using TankRx.Common.Interfaces;
 using TankRx.Enemy.ViewModels;
 using UnityEngine;
 

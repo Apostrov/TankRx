@@ -1,4 +1,4 @@
-﻿namespace TankRx.Bullet.Interfaces
+﻿namespace TankRx.Common.Interfaces
 {
     public interface IDamageable
     {

@@ -4,6 +4,7 @@ using TankRx.Enemy.Models;
 using TankRx.Enemy.ViewModels;
 using TankRx.Player.Interfaces;
 using UniRx;
+using UniRx.Triggers;
 using UnityEngine;
 
 namespace TankRx.Enemy.Factory
@@ -24,6 +25,7 @@ namespace TankRx.Enemy.Factory
         public EnemyViewModel Create(Vector3 position, Quaternion rotation)
         {
             var enemy = Spawn(position, rotation);
+            RegisterAliveEnemy(enemy);
             SubscribeToFollowPlayer(enemy);
             SubscribeToDestroyOnZeroHp(enemy);
             return enemy;
@@ -34,9 +36,13 @@ namespace TankRx.Enemy.Factory
             var enemyConfig = _config.GetRandomEnemy();
             var enemy = Object.Instantiate(enemyConfig.Prefab, position, rotation);
             enemy.SetModel(enemyConfig.EnemyModel);
-            _aliveModel.RegisterNewEnemy(enemy);
-            enemy.OnDestroyCallback = () => _aliveModel.UnregisterEnemy(enemy);
             return enemy;
+        }
+
+        private void RegisterAliveEnemy(EnemyViewModel enemy)
+        {
+            _aliveModel.RegisterNewEnemy(enemy);
+            enemy.OnDestroyAsObservable().Subscribe(_ => _aliveModel.UnregisterEnemy(enemy));
         }
 
         private void SubscribeToFollowPlayer(EnemyViewModel enemy)

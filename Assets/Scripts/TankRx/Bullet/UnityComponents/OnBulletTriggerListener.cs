@@ -1,5 +1,5 @@
-﻿using TankRx.Bullet.Interfaces;
-using TankRx.Bullet.ViewModels;
+﻿using TankRx.Bullet.ViewModels;
+using TankRx.Common.Interfaces;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5328970434028213062}
   - component: {fileID: 215299106993326672}
+  - component: {fileID: 2105651440195061243}
   - component: {fileID: 914817509670395932}
   - component: {fileID: 4014014009341842163}
   m_Layer: 7
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyViewModel: {fileID: 7525953371389332605}
+--- !u!114 &2105651440195061243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045024583215176942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f795503ca145478db142b6c9070fb578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyViewModel: {fileID: 7525953371389332605}
 --- !u!54 &914817509670395932
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71,7 +85,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045024583215176942}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
